@@ -2,6 +2,7 @@ import xlrd
 import json
 import nltk
 import gensim
+import sys
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.lancaster import LancasterStemmer
@@ -39,18 +40,24 @@ def deal_string(abs_str, lsi, index_lsi, lda, index_lda):
     abs_sims_lda = list(enumerate(sims_lda))
     return abs_sims_lsi, abs_sims_lda
 
-with open('corpus.txt', encoding='utf-8') as f:
+filename_corpus = sys.argv[1]
+filename_paper = sys.argv[2]
+filename_project = sys.argv[3]
+
+print(filename_corpus, filename_paper, filename_project)
+
+with open(filename_corpus, encoding='utf-8') as f:
     for line in f:
         texts_corpus.append(line.split(' '))
 
 paper_cnt = 0
-with open('paper.txt', encoding='utf-8') as f:
+with open(filename_paper, encoding='utf-8') as f:
     for line in f:
         paper_cnt += 1
         texts_paper.append(line.split(' '))
 
 project_cnt = 0
-with open('project.txt', encoding='utf-8') as f:
+with open(filename_project, encoding='utf-8') as f:
     for line in f:
         project_cnt += 1
         texts_project.append(line)
